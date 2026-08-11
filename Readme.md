@@ -27,7 +27,7 @@ commodities-pipeline/
 ├── README.md                    # Documentação principal do projeto
 ├── main.py                      # Orquestrador do pipeline (Executa os scripts na ordem correta)
 └── requirements.txt             # Dependências do Python (tsfresh, scikit-learn, plotly, etc.)
-
+```
 
 ## Arquitetura do Projeto
 
