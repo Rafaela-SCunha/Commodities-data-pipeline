@@ -1,46 +1,45 @@
-name: Atualizar Base de Commodities
+name: Execução Mensal do Pipeline Quantitativo
 
 on:
   schedule:
-    # Roda toda sexta-feira às 23:00 UTC (20:00 no Brasil)
-    - cron: '0 23 * * 5'
-  workflow_dispatch: # Permite que você clique num botão no GitHub para rodar agora mesmo
+    # Roda todo dia 1º de cada mês às 03:00 UTC (Meia-noite no Brasil)
+    - cron: '0 3 1 * *'
+  workflow_dispatch: # Botão  para rodar manualmente quando quiser
 
 jobs:
-  atualizar-dados:
+  executar-pipeline:
     runs-on: ubuntu-latest
     
-    # Dá permissão para o robô salvar o arquivo CSV de volta no seu repositório
     permissions:
       contents: write
 
     steps:
-    - name: 📥 Clonar o repositório
+    - name: Clonar o repositório
       uses: actions/checkout@v4
 
-    - name: 🐍 Configurar o Python
+    - name: Configurar o Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.10'
 
-    - name: 📦 Instalar bibliotecas
+    - name: Instalar bibliotecas
       run: pip install -r requirements.txt
 
-    - name: ⚙️ Executar o script de coleta
+    - name: Orquestrar Pipeline (Coleta, Features e Modelo)
       env:
-        # Aqui o robô abre o "cofre" do GitHub e injeta as chaves no código
+        # Injeção segura das chaves de API guardadas no GitHub Secrets
         FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         ALPHA_API_KEY: ${{ secrets.ALPHA_API_KEY }}
-      run: python collect_data_Apis.py
+      run: python main.py
 
-    - name: 💾 Commit e Push do novo CSV
+    - name: Salvar Resultados (Commit e Push)
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add commodities_mensal.csv
-        # Se você criou o arquivo de log, descomente a linha abaixo tirando o #
-        # git add log_automacao.txt
         
-        # O comando abaixo tenta commitar. Se não houver dados novos, ele não dá erro, apenas avisa.
-        git commit -m "🤖 Atualização automática da base de dados" || echo "Sem mudanças para commitar"
+        # Adiciona a pasta de dados inteira e a pasta de imagens
+        git add data/
+        git add image/
+        
+        git commit -m "Pipeline rodou: Novos dados, features e modelos treinados" || echo "Sem mudanças para commitar"
         git push
