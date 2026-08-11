@@ -3,7 +3,7 @@ import plotly.express as px
 from sklearn.preprocessing import MinMaxScaler
 
 # 1. Carregar os dados modelados
-df_regimes = pd.read_csv('../data/crisis_regimes.csv', index_col=0)
+df_regimes = pd.read_csv('data/crisis_regimes.csv', index_col=0)
 
 # 2. Transformação Matemática para Dados Composicionais
 # O Plotly Ternary exige valores positivos. O MinMaxScaler ajusta as 3 componentes para um range de 0 a 1.

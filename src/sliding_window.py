@@ -1,7 +1,7 @@
 import pandas as pd
 
 # 1. Carregar o dataset consolidado
-df = pd.read_csv('../data/monthly_commodities.csv')
+df = pd.read_csv('data/monthly_commodities.csv')
 df['data'] = pd.to_datetime(df['data'])
 df.set_index('data', inplace=True)
 
@@ -28,7 +28,7 @@ for i in range(0, len(df) - window_size + 1, stride):
 df_rolling_ready = pd.concat(windows_list, ignore_index=True)
 
 # 5. Salva o resultado pronto para a extração de features
-df_rolling_ready.to_csv('../data/rolling_windows.csv', index=False)
+df_rolling_ready.to_csv('data/rolling_windows.csv', index=False)
 
 print("✅ Janelas deslizantes geradas com sucesso!")
 print(f"Total de janelas de análise criadas: {len(windows_list)}")

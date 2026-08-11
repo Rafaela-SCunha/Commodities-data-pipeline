@@ -8,7 +8,7 @@ if __name__ == '__main__':
     # ==============================================================
     # FASE 1: TRATAMENTO MATEMÁTICO DA SÉRIE TEMPORAL
     # ==============================================================
-    df = pd.read_csv('../data/monthly_commodities.csv')
+    df = pd.read_csv('data/monthly_commodities.csv')
     df['data'] = pd.to_datetime(df['data'])
     df.set_index('data', inplace=True)
 
@@ -48,4 +48,4 @@ if __name__ == '__main__':
     )
 
     print(f"✅ Extração concluída com sucesso! Matriz gerada: {extracted_features.shape}")
-    extracted_features.to_csv('../data/raw_features.csv')
+    extracted_features.to_csv('data/raw_features.csv')

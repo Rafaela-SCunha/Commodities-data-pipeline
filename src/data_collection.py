@@ -175,7 +175,7 @@ if __name__ == "__main__":
     
     #END_DATE = '2026-02-28'
     END_DATE = None
-    NOME_FICHEIRO = '../data/monthly_commodities.csv'
+    NOME_FICHEIRO = 'data/monthly_commodities.csv'
     
     # Executa o Pipeline unificado
     df_final = atualizar_base_unificada(API_KEY_FRED, API_KEY_ALPHA, lista_fred, lista_alpha, NOME_FICHEIRO, END_DATE)

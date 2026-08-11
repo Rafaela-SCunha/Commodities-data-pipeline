@@ -1,11 +1,11 @@
 import pandas as pd
 
 # 1. Carregar o dataset original consolidado para resgatar as datas
-df_original = pd.read_csv('../data/monthly_commodities.csv')
+df_original = pd.read_csv('data/monthly_commodities.csv')
 df_original['data'] = pd.to_datetime(df_original['data'])
 
 # 2. Carregar os resultados dos regimes gerados pelo modelo
-df_regimes = pd.read_csv('../data/crisis_regimes.csv', index_col=0)
+df_regimes = pd.read_csv('data/crisis_regimes.csv', index_col=0)
 
 # 3. Filtrar apenas os pontos vermelhos (Anomaly_Label == -1)
 crises = df_regimes[df_regimes['Anomaly_Label'] == -1].copy()

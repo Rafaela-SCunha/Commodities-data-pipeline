@@ -4,7 +4,7 @@ from sklearn.ensemble import IsolationForest
 from tsfresh.utilities.dataframe_functions import impute
 
 # 1. Carregar a matriz de características gerada pelo TSFresh
-features_df = pd.read_csv('../data/raw_features.csv', index_col=0)
+features_df = pd.read_csv('data/raw_features.csv', index_col=0)
 
 # O TSFresh gera valores nulos se encontrar divisões por zero durante 
 # as operações estatísticas. A função 'impute' trata isso instantaneamente.
@@ -37,7 +37,7 @@ df_regimes['Anomaly_Label'] = anomaly_labels
 df_regimes['Anomaly_Score'] = anomaly_scores
 
 # 5. Salvar os resultados analíticos
-df_regimes.to_csv('../data/crisis_regimes.csv')
+df_regimes.to_csv('data/crisis_regimes.csv')
 
 print("✅ Modelagem concluída com sucesso! Matriz salva.")
 print(df_regimes.head()) 
