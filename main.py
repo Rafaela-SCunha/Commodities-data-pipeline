@@ -25,7 +25,7 @@ if __name__ == "__main__":
     scripts_pipeline = [
         "data_collection.py",
         "sliding_window.py",
-        "feature_extraction.py",
+        "features_extraction.py",
         "crisis_modeling.py",
         "model_validation.py",
         "plot_results.py"
